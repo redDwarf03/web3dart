@@ -1,3 +1,4 @@
+// @dart=2.9
 part of 'package:web3dart/crypto.dart';
 
 final ECDomainParameters _params = ECCurve_secp256k1();

@@ -1,3 +1,4 @@
+// @dart=2.9
 part of 'package:web3dart/crypto.dart';
 
 const int _shaBytes = 256 ~/ 8;

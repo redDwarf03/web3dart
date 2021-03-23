@@ -1,3 +1,4 @@
+// @dart=2.9
 /// Exports low-level cryptographic operations needed to sign Ethereum
 /// transactions.
 library crypto;

@@ -1,4 +1,5 @@
-/// Library to create and unlock Ethereum wallets and operate with private keys.
+// @dart=2.9
+/// // Library to create and unlock Ethereum wallets and operate with private keys.
 library credentials;
 
 import 'dart:async';

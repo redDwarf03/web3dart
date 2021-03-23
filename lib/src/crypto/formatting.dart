@@ -1,3 +1,4 @@
+// @dart=2.9
 part of 'package:web3dart/crypto.dart';
 
 /// If present, removes the 0x from the start of a hex-string.

@@ -45,10 +45,11 @@ Uint8List hexToBytes(String hexStr) {
   return Uint8List.fromList(bytes);
 }
 
-///Converts the bytes from that list (big endian) to an unsigned BigInt.
-BigInt bytesToInt(List<int> bytes) => p_utils.decodeBigInt(bytes);
 
-Uint8List intToBytes(BigInt number) => p_utils.encodeBigInt(number);
+///Converts the bytes from that list (big endian) to an unsigned BigInt.
+BigInt bytesToInt(List<int> bytes) => _decodeBigInt(bytes);
+
+Uint8List intToBytes(BigInt number) => _encodeBigInt(number);
 
 ///Takes the hexadecimal input and creates a [BigInt].
 BigInt hexToInt(String hex) {
@@ -58,4 +59,28 @@ BigInt hexToInt(String hex) {
 /// Converts the hexadecimal input and creates an [int].
 int hexToDartInt(String hex) {
   return int.parse(strip0x(hex), radix: 16);
+}
+
+var _byteMask = new BigInt.from(0xff);
+
+/// Encode a BigInt into bytes using big-endian encoding.
+Uint8List _encodeBigInt(BigInt number) {
+  // Not handling negative numbers. Decide how you want to do that.
+  int size = (number.bitLength + 7) >> 3;
+  var result = new Uint8List(size);
+  for (int i = 0; i < size; i++) {
+    result[size - i - 1] = (number & _byteMask).toInt();
+    number = number >> 8;
+  }
+  return result;
+}
+
+/// Decode a BigInt from bytes in big-endian encoding.
+BigInt _decodeBigInt(List<int> bytes) {
+  BigInt result = BigInt.from(0);
+  //
+  for (int i = 0; i < bytes.length; i++) {
+    result += BigInt.from(bytes[bytes.length - i - 1]) << (8 * i);
+  }
+  return result;
 }
